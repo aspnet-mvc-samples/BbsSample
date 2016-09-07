@@ -46,8 +46,9 @@ namespace BbsSample.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,UserName,Body,Created")] Comment comment)
+        public ActionResult Create([Bind(Include = "Id,UserName,Body")] Comment comment)
         {
+            comment.Created = DateTime.Now;
             if (ModelState.IsValid)
             {
                 db.Comments.Add(comment);
