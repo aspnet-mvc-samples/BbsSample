@@ -18,7 +18,11 @@ namespace BbsSample.Controllers
         // GET: Comments
         public ActionResult Index()
         {
-            return View(db.Comments.ToList());
+            var comments = from comment in db.Comments
+                           orderby comment.Created descending
+                           select comment;
+            //db.Comments.OrderByDescending(item => item.Created);
+            return View(comments.ToList());
         }
 
         // GET: Comments/Create
