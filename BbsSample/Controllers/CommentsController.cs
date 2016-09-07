@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BbsSample.Models;
+using Microsoft.AspNet.Identity;
 
 namespace BbsSample.Controllers
 {
@@ -23,7 +24,9 @@ namespace BbsSample.Controllers
         // GET: Comments/Create
         public ActionResult Create()
         {
-            return View();
+            Comment comment = new Comment { UserName = User.Identity.GetUserName(), Body = "" };
+            if (string.IsNullOrEmpty(comment.UserName)) comment.UserName = "名無し";
+            return View(comment);
         }
 
         // POST: Comments/Create
