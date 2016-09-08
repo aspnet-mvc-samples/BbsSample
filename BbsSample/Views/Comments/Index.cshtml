@@ -10,9 +10,7 @@
 
 <h2>Index</h2>
 
-<div>
-    @Html.Partial("_CreateForm", new BbsSample.Models.Comment { UserName = ViewBag.PostUserName })
-</div>
+@Html.Partial("_CreateForm", new BbsSample.Models.Comment { UserName = ViewBag.PostUserName })
 
 @foreach (var item in Model) {
     
