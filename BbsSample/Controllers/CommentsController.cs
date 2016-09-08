@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using BbsSample.Models;
 using Microsoft.AspNet.Identity;
+using PagedList;
 
 namespace BbsSample.Controllers
 {
@@ -24,12 +25,18 @@ namespace BbsSample.Controllers
         [Route("~/page{page}")]
         public ActionResult Index(int? page)
         {
+            int pageNumber = page ?? 1;
+            int pageSize = 3;
+
+            // ページ番号表示用
             ViewBag.Page = page;
+
+            // SELECT
             var comments = from comment in db.Comments
                            orderby comment.Created descending
                            select comment;
-            //db.Comments.OrderByDescending(item => item.Created);
-            return View(comments.ToList());
+
+            return View(comments.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Comments/Create
