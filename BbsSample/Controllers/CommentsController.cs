@@ -11,13 +11,20 @@ using Microsoft.AspNet.Identity;
 
 namespace BbsSample.Controllers
 {
+    [RoutePrefix("Comments")]
     public class CommentsController : Controller
     {
         private BbsDbContext db = new BbsDbContext();
 
         // GET: Comments
-        public ActionResult Index()
+        [Route("")]
+        [Route("Index")]
+        [Route("Index/{page}")]
+        [Route("~/")]
+        [Route("~/page{page}")]
+        public ActionResult Index(int? page)
         {
+            ViewBag.Page = page;
             var comments = from comment in db.Comments
                            orderby comment.Created descending
                            select comment;
