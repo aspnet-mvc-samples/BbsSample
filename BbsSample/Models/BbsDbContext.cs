@@ -9,5 +9,10 @@ namespace BbsSample.Models
     public class BbsDbContext : DbContext
     {
         public DbSet<Comment> Comments { get; set; }
+
+        public BbsDbContext()
+            : base("DefaultConnection")
+        {
+        }
     }
 }
