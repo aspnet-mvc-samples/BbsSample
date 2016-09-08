@@ -1,4 +1,4 @@
-﻿body {
+body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -22,3 +22,9 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/* 常に縦スクロールバー出す（好みの問題） */
+html {
+    overflow-y: scroll;
+}
+
