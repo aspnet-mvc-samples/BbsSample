@@ -10,16 +10,9 @@
 
 <h2>Index</h2>
 
-<p>
-    現在のページ：
-    @(Model.PageCount < Model.PageNumber ? "-" : Model.PageNumber.ToString())
-    /
-    @Model.PageCount
-</p>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<div>
+    @Html.Partial("_CreateForm", new BbsSample.Models.Comment { UserName = ViewBag.PostUserName })
+</div>
 
 @foreach (var item in Model) {
     
@@ -36,6 +29,11 @@
     </div>
 }
 
+
 <div>
+    Page:
+    @(Model.PageCount < Model.PageNumber ? "-" : Model.PageNumber.ToString())
+    /
+    @Model.PageCount
     @Html.PagedListPager(Model, page => Url.Action("Index", "page" + page))
 </div>

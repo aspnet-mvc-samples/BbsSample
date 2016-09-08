@@ -25,11 +25,13 @@ namespace BbsSample.Controllers
         [Route("~/page{page}")]
         public ActionResult Index(int? page)
         {
+            // 投稿用ユーザ名
+            ViewBag.PostUserName = User.Identity.GetUserName();
+            if (string.IsNullOrEmpty(ViewBag.PostUserName)) ViewBag.PostUserName = "名無し";
+
+            // ページ情報
             int pageNumber = page ?? 1;
             int pageSize = 3;
-
-            // ページ番号表示用
-            ViewBag.Page = page;
 
             // SELECT
             var comments = from comment in db.Comments

@@ -1,6 +1,6 @@
 ﻿@model BbsSample.Models.Comment
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "Comments"))
 {
     @Html.AntiForgeryToken()
 
