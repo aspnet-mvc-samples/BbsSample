@@ -151,7 +151,11 @@ namespace BbsSample.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -367,7 +371,18 @@ namespace BbsSample.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+
+                // ユーザ生成
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email
+                };
+                if (info.Login.LoginProvider == "Twitter") // Twitter連携の場合はTwitter情報を被せる
+                {
+                    user.UserName = "@" + info.DefaultUserName;
+                    user.TwitterAccount = info.DefaultUserName;
+                }
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
