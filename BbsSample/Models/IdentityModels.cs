@@ -16,6 +16,8 @@ namespace BbsSample.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public string TwitterAccount { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
